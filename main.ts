@@ -30,3 +30,7 @@ scene.setBackgroundColor(7)
 scene.cameraFollowSprite(Monkey)
 let currentLevel = 0
 let levelCount = 3
+game.onUpdate(function () {
+    Monkey.x += controller.dx()
+    Monkey.y += controller.dy()
+})
