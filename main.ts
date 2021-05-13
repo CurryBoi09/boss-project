@@ -1,13 +1,21 @@
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava0, function (sprite, location) {
+    music.smallCrash.play()
+    statusbar.value += -1
+})
 function setLevelMap (num: number) {
     if (num == 0) {
         tiles.setTilemap(tilemap`level1`)
     } else {
     	
     }
+    hasNextLevel()
 }
 function hasNextLevel () {
-	
+    return currentLevel != levelCount
 }
+let statusbar: StatusBarSprite = null
+let levelCount = 0
+let currentLevel = 0
 let Monkey = sprites.create(img`
     . . . . . . . f f f f f . . . . 
     . . . . . . f 5 5 5 5 5 f . . . 
@@ -26,10 +34,13 @@ let Monkey = sprites.create(img`
     . . . f d b b d d c d d f . . . 
     . . . f f f f f f f f f . . . . 
     `, SpriteKind.Player)
-scene.setBackgroundColor(7)
 scene.cameraFollowSprite(Monkey)
-let currentLevel = 0
-let levelCount = 3
+currentLevel = 0
+levelCount = 3
+Monkey.setPosition(60, 720)
+setLevelMap(0)
+statusbar = statusbars.create(20, 4, StatusBarKind.Health)
+statusbar.attachToSprite(Monkey)
 game.onUpdate(function () {
     Monkey.x += controller.dx()
     Monkey.y += controller.dy()
