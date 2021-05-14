@@ -1,10 +1,20 @@
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile`, function (sprite, location) {
+    statusbar.value += 30
+    music.baDing.play()
+    tiles.setTileAt(location, sprites.dungeon.floorLightMoss)
+})
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava0, function (sprite, location) {
     music.smallCrash.play()
-    statusbar.value += -1
+    statusbar.value += -0.1
+})
+statusbars.onZero(StatusBarKind.Health, function (status) {
+    game.over(false)
 })
 function setLevelMap (num: number) {
     if (num == 0) {
         tiles.setTilemap(tilemap`level1`)
+    } else if (num == 2) {
+        tiles.setTilemap(tilemap`level2`)
     } else {
     	
     }
